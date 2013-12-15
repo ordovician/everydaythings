@@ -1,0 +1,1 @@
+Excercises from the book "Exploring Everyday Things with R and Ruby", but with the difference that I am trying to do it in the julia programming language instead.
