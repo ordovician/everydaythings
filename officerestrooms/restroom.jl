@@ -1,11 +1,13 @@
 type Restroom
     queue::Vector{Person}
     facilities::Vector{Facility}
-    
-    function Restroom()
-        new(Person[],3)
-    end
 end
+
+function Restroom(facilities_per_restroom)
+    Restroom(Person[], [Facility() for i in 1:facilities_per_restroom])
+end
+
+Restroom() = Restroom(3) 
 
 function enter!(room::Restroom, person::Person)
    unoccupied_facility = find(facility -> !occupied(facility), facilities)

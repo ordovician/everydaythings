@@ -1,39 +1,37 @@
-
+include("person.jl")
+include("facility.jl")
+include("restroom.jl")
 
 const frequency = 3
 const facilities_per_restroom = 3
 const use_duration = 1
-const population_range = 10:600
+const population_range = 10:10:600
 
 # maps population size to a restroom queue sizes
-data = Dict{Int32, Vector{Int32}}
+data = Dict{Int64, Vector{Int64}}()
 
 for population_size in population_range
-    empty!(population)
-    for i in population_size
-        push!(population, Person(frequency, use_duration))
-        restroom = Restroom(facilities_per_restroom)
-        
-        data[population_size] = map(1:DURATION) do t
-            queue_size = length(restroom.queue)
-            queue = copy(restroom.queue)
-            empty!(restroom.queue)
-        
-            if !isempty(queue)
-                enter!(restroom, shift!(queue))
+    population = [Person(frequency, use_duration) for i in 1:population_size]
+    restroom = Restroom(facilities_per_restroom) 
+    data[population_size] = map(1:DURATION) do t
+        queue_size = length(restroom.queue)
+        queue = copy(restroom.queue)
+        empty!(restroom.queue)
+            
+        if !isempty(queue)
+            enter!(restroom, shift!(queue))
+        end
+        for person in population
+            if need_to_go(person)
+                enter!(restroom, person)
             end
-            for person in population
-                if need_to_go(person)
-                    enter!(restroom, person)
-                end
-            end
-            tick!(restroom)
-            queue_size
-        end     
-    end
+        end
+        tick!(restroom)
+        queue_size
+    end    
 end
 
-lbl = [10:10:600]
+lbl = [population_range]
 
 csv = Vector{Int32}[]
 push!(csv, lbl)

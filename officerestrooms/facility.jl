@@ -1,7 +1,9 @@
 # A facility at a restoom. Basically a toilet, which may be occupied by a person
 type Facility
    occupier::Union(Person, Nothing)
-   duration::Int32 
+   duration::Int32
+   
+   Facility() = new(nothing, 0)
 end
 
 # Let a person occupy toilet in restroom
