@@ -11,10 +11,11 @@ function Restroom(facilities_per_restroom::Int64, population::Set{Person})
 end
 
 function enter!(room::Restroom, person::Person)
-   unoccupied_facility = find(facility -> !occupied(facility), facilities)
-   if isempty(unoccupied_facility)
+   indicies = find(facility -> !occupied(facility), room.facilities)
+   if isempty(indicies)
        push!(room.queue, person)
    else
+       unoccupied_facility = room.facilities[first(indicies)]
        occupy!(unoccupied_facility, person, room.population)
    end
 end
