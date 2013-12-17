@@ -7,7 +7,7 @@ type Facility
 end
 
 # Let a person occupy toilet in restroom
-function occupy!(f::Facility, person::Person)
+function occupy!(f::Facility, person::Person, population::Set{Person})
    if occupied(f)
        return false
    end
@@ -22,15 +22,15 @@ end
 occupied(f::Facility) = !is(f.occupier, nothing)
 
 # Make occupant leave facility
-function vacate!(f::Facility)
+function vacate!(f::Facility, population::Set{Person})
     push!(population, f.occupier)
     f.occupier = nothing
 end
 
 # Advance the time in simulation. If occupant is finnished he/she will leave
-function tick!(f::Facility)
+function tick!(f::Facility, population::Set{Person})
    if occupied(f) && f.duration > f.occupier.use_duration
-       vacate!(f)
+       vacate!(f, population)
        f.duration = 0
    elseif occupied(f)
        f.duration += 1
