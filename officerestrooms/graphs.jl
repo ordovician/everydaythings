@@ -27,6 +27,6 @@ p = FramedPlot(
 
 # Each line adds a curve to the frameplot. Kind says what each point will
 # look like.
-add(p, Points(xs, means, kind="circle", color="blue"))
-add(p, Points(xs, medians, kind="circle", color="green"))
-add(p, Points(xs, maxes, kind="circle", color="red"))
+add(p, Curve(xs, means, color="blue"))
+add(p, Curve(xs, medians, color="green"))
+add(p, Curve(xs, maxes, color="red"))
