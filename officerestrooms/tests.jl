@@ -17,8 +17,17 @@ const duration = 10
 # println("p: $(length(pop)) q: $(length(queue)) o: $(length(indicies))")
 
 
-
-
+# Explanation of algorithm at inner loop. For each tick we record
+# the following information: 
+#   - how many are standing in line to go to the restroom
+#   - 0 to 3 pieces of paper. One for each person present in a facility. When a person enters we write 2.
+#   - how many are left in the rest of the office
+# Each tick we deduct 1 from the facility cards. If there are less than 3 cards we
+# keep reducing number of people in queue and add cards at the top of cardstack.
+# As long as there are cards we start looking at the bottom of the stack and remove
+# every card marked with 0. Each time we remove a card we increase population size with 1.
+# Each tick we roll a dice for every office worker not in a facility or standing in line. The dice has duration number of sides. If we get less than frequence, we place
+# person in line.
 function test_alt()
     const freq = 3
     const no_facilities = 3
