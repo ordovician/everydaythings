@@ -11,18 +11,16 @@ for population_size in population_range
     data[population_size] = queue_sizes_after(restroom, DURATION)    
 end
 
-lbl = [population_range]
 
-csv = Vector{Int32}[]
-push!(csv, lbl)
+csv = Array(Int32, (DURATION + 1, length(population_range)))
+csv[1,:] = population_range
 
-append!(csv, map(1:DURATION) do t
-    
-    # Get a row with 60 columns
-    map(10:10:600) do population_size
-        data[population_size][t]
-    end
-end)
-
+for t in 1:DURATION
+    column = 1
+    for population_size in population_range
+      csv[t+1, column] = data[population_size][t]
+      column += 1
+    end 
+end
 
 writecsv("simulation1.csv", csv)
