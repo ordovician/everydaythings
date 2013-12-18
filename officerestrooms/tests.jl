@@ -1,6 +1,6 @@
 using Office
 
-const duration = 10
+const duration = 540
 
 # queue = restroom.queue
 

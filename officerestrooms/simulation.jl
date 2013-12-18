@@ -1,7 +1,7 @@
 using Office
 
 const population_range = 10:10:600
-const DURATION = 10
+const DURATION = 540
 
 # maps population size to a restroom queue sizes
 data = Dict{Int64, Vector{Int64}}()
