@@ -15,7 +15,7 @@ no_cols = size(data,2)
 
 # Median and max queue lengths for each population size
 medians = map(col -> median(data[:,col]), 1:no_cols)
-maxes = map(col -> max(data[:,col]), 1:no_cols)
+maxes = map(col -> maximum(data[:,col]), 1:no_cols)
 
 # A plot where the axis are surrounding the plot instead of being in the centre
 p = FramedPlot(
