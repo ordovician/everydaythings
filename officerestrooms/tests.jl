@@ -24,10 +24,6 @@ function test_alt()
     const no_facilities = 3
     const use_duration = 2
     
-    queue_length = 0
-    population  = 80
-    facilities = Array(Int64, 0)
-    
     const population_range = 10:10:600
     
     # println("population size: $population")
@@ -36,12 +32,21 @@ function test_alt()
     
     data = Array(Int32, (duration, length(population_range)))
     for population_size in population_range
+        population = population_size
+        queue_length = 0
+        # population  = 80
+        facilities = Array(Int64, 0)
         for t in 1:duration
             popcount = population
             for i in 1:popcount
                 if rand(1:duration) <= freq
                     queue_length += 1
                     population -= 1
+                    
+                    combined_pop = queue_length + population + length(facilities)
+                    if combined_pop != population_size
+                        error("t: $t i: $i | $queue_length + $population + $(length(facilities)) != $population_size")
+                    end
                 end           
             end 
         
@@ -51,8 +56,14 @@ function test_alt()
             end
         
             while !isempty(facilities) && first(facilities) == 0
+                @assert length(facilities) > 0
                 shift!(facilities)
                 population += 1
+                
+                combined_pop = queue_length + population + length(facilities)
+                if combined_pop != population_size
+                    error("t: $t | $queue_length + $population + $(length(facilities)) != $population_size")
+                end
             end
         
             while queue_length > 0 && length(facilities) < no_facilities
