@@ -1,3 +1,4 @@
+# Use this to plot the results from running the simulation
 using Winston
 
 # xs will contain the first line which is our header
@@ -5,7 +6,7 @@ using Winston
 
 # even if header consists of numbers it will be read as an array of strings
 # it seems so we need to convert it
-xs = map(int32, xs)
+xs = map(int64, xs)
 
 # mean value for every column. Or rather the mean queue length for each
 # population size

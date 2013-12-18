@@ -1,3 +1,6 @@
+# A restroom has a number of facilities each containing a toilet or urinal.
+# There is a queue forming in the restroom wairing for an available facility.
+# population are all the people outside the restroom
 type Restroom
     queue::Vector{Person}
     facilities::Vector{Facility}
@@ -10,6 +13,7 @@ function Restroom(facilities_per_restroom::Int64, population::Set{Person})
             population)
 end
 
+# Person enters restroom and either finds an empty facility or gets in line
 function enter!(room::Restroom, person::Person)
    indicies = find(facility -> !occupied(facility), room.facilities)
    if isempty(indicies)
@@ -20,6 +24,7 @@ function enter!(room::Restroom, person::Person)
    end
 end
 
+# Advance the time with one logic unit (typically this means 1 minute)
 function tick!(room::Restroom)
     for f in room.facilities
         tick!(f, room.population)
