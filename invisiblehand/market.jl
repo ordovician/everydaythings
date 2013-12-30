@@ -1,12 +1,3 @@
-type Market
-    producers::Vector{Producer}
-    average_price::Float64
-    function Market(producers)
-        average_price = 
-            round(mapreduce(p->p.price, +, producers) / length(producers), 2)
-    end
-end
-
 supply(m::Market) = mapreduce(p->p.supply, +, m.producers)
 demand(m::Market) = mapreduce(p->demands, +, m.producers)
 

@@ -1,9 +1,3 @@
-const MAX_ACCEPTABLE_PRICE = 
-
-type Consumer
-   demands::Float64 
-end
-
 # keep buying from cheapest producer with goods left until demand satisfied
 function buy!(c::Consumer, market::Market)
     while c.demands > 0 && market.supply > 0

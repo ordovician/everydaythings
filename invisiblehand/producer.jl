@@ -1,9 +1,4 @@
-type Producer
-    price::Floa64
-    supply::Float64
-end
-
-generate_goods!(p::Producer, market::Market) = if market.price > COST; p.supply += SUPPLY_INCREMENT
+generate_goods!(p::Producer, market::Market) = if market.price > COST; p.supply += SUPPLY_INCREMENT end
 
 function produce!(p::Producer, market::Market)
     if p.supply > 0
