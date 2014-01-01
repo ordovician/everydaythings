@@ -7,7 +7,7 @@ end
 function produce!(p::Producer, market::Market)
     if p.supply > 0
         if p.price > COST
-            p.price *= PRICE_DECREMENT
+            p.price = max(p.price * PRICE_DECREMENT, COST)
         end
     else
         p.price *= PRICE_INCREMENT
