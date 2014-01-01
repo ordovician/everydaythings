@@ -5,8 +5,9 @@ end
 supply(m::Market) = mapreduce(p->p.supply, +, m.producers)
 demand(m::Market) = mapreduce(c->c.demands, +, m.consumers)
 
-function cheapest_producer(m::Market) 
-    reduce(nothing, m.producers) do memo, supplier
+function cheapest_producer(m::Market)
+    producers = filter(f->f.supply > 0, m.producers)
+    reduce(nothing, producers) do memo, supplier
         if memo == nothing || supplier.price < memo.price
             supplier
         else

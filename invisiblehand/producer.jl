@@ -1,4 +1,8 @@
-generate_goods!(p::Producer, market::Market) = if market.price > COST; p.supply += SUPPLY_INCREMENT end
+function generate_goods!(p::Producer, market::Market) 
+    if average_price(market) > COST
+        p.supply += SUPPLY_INCREMENT 
+    end
+end
 
 function produce!(p::Producer, market::Market)
     if p.supply > 0

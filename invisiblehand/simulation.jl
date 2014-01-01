@@ -35,3 +35,6 @@ for t in 1:SIMULATION_DURATION
     end
 end
 
+writecsv("demand_supply.csv", demand_supply)
+writecsv("price_demand.csv", price_demand)
+
