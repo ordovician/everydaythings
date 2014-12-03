@@ -23,7 +23,7 @@ p = FramedPlot(
          title="Restroom queues",
          xlabel="Population",
          ylabel="Queue Length")
-         
+
 # add(p, Curve(xs, means, color="blue"))
 
 # Each line adds a curve to the frameplot. Kind says what each point will
